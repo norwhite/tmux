@@ -687,6 +687,7 @@ screen_redraw_pane(struct client *c, struct window_pane *wp,
 	 * Redraw scrollbar if needed. Always redraw scrollbar in a mode because
 	 * if redrawing a pane, it's because pane has scrolled.
 	 */
+	mode = window_pane_mode(wp);
 	pane_scrollbars = ctx.pane_scrollbars;
 	if (pane_scrollbars == PANE_SCROLLBARS_MODAL &&
 	    mode == WINDOW_PANE_NO_MODE)
@@ -974,7 +975,6 @@ screen_redraw_draw_pane_scrollbar(struct screen_redraw_ctx *ctx,
 	u_int		 sb_pos = ctx->pane_scrollbars_pos, slider_h, slider_y;
 	u_int		 sb_w = PANE_SCROLLBARS_WIDTH, cm_y, cm_size;
 	int		 sb_x, sb_y = (int)(wp->yoff - ctx->oy); /* sb top */
-
 	if (window_pane_mode(wp) == WINDOW_PANE_NO_MODE) {
 		if (sb == PANE_SCROLLBARS_MODAL)
 			return;
